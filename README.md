@@ -7,3 +7,7 @@ Drag and drop one or more video files onto 3dSbsToYoutube.app and a copy will be
 # ConcatenateVideos
 
 Drag and drop multiple video files onto ConcatenateVideos.app and an output file named the same as the first file with "CONCAT_" prepended will be created by losslessly (and quickly) concatenating all videos together. The order of files will be displayed for confirmation before concatenating, and the script may need to be edited if they are not in the desired order.
+
+# FacebookDisable360
+
+Use as a bookmarklet on the page when uploading images to an album to disable the 360 feature. Useful when uploading 3D SBS photos.
