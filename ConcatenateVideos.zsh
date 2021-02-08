@@ -41,7 +41,7 @@ outfilename=${firstParam:t}
 outfilepath=${base}/CONCAT_${outfilename}
 
 # Complete the command
-command+="ffmpeg -f mpegts -i \"concat:${(j:|:)pipes}\" -c copy -bsf:a aac_adtstoasc \"$outfilepath\""
+command+="ffmpeg -f mpegts -i \"concat:${(j:|:)pipes}\" -map_metadata 0 -c copy -bsf:a aac_adtstoasc \"$outfilepath\""
 
 # echo $command
 eval $command

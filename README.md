@@ -6,7 +6,11 @@ Drag and drop one or more video files onto 3dSbsToYoutube.app and a copy will be
 
 # ConcatenateVideos
 
-Drag and drop multiple video files onto ConcatenateVideos.app and an output file named the same as the first file with "CONCAT_" prepended will be created by losslessly (and quickly) concatenating all videos together. The order of files will be displayed for confirmation before concatenating, and the script may need to be edited if they are not in the desired order.
+Drag and drop multiple video files onto ConcatenateVideos.app and an output file named the same as the first file with "CONCAT_" prepended will be created by losslessly (and quickly) concatenating all videos together. The order of files will be displayed for confirmation before concatenating, and the script may need to be edited if they are not in the desired order. The concatenated video will lose the matadata that YouTube uses to recognize that the video is spherical, so Spatial Media Medatata Injector (see below) can be used on the concatenated video before upload.
+
+# Spatial Media Metadata Injector (YouTube 360 enabler)
+
+This tool from Google (https://github.com/google/spatial-media/releases/tag/v2.0) injects metadata into videos to allow YouTube to recognize the video as interactive 360 video, instead of displaying the source equirectangular video. This is not necessary when uploading a video produced by Vuze XR Studio, but because videos lose their metadata when concatenated, the metadata needs to be injected into the final video before upload.
 
 # FacebookDisable360
 
