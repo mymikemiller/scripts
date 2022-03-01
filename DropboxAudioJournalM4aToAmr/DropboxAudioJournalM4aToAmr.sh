@@ -32,8 +32,6 @@ echo "Starting script with $freeSpaceAtStart MB free on DropBox"
   tempBasePath="temp"
 
   dropboxSourcePath="$dropboxBasePath/$filename"
-  echo dropboxSourcePath
-  echo $dropboxSourcePath
   dropboxDestinationPath="$dropboxBasePath/$destinationFileName"
 
   tempSourcePath="$tempBasePath/$filename"
