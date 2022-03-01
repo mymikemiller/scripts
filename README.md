@@ -15,3 +15,7 @@ This tool from Google (https://github.com/google/spatial-media/releases/tag/v2.0
 # FacebookDisable360
 
 Use as a bookmarklet on the page when uploading images to an album to disable the 360 feature. Useful when uploading 3D SBS photos.
+
+# DropboxAudioJournalM4aToAmr
+
+Run this script without any parameters to automatically log into Dropbox (uses Dropbox-Uploader, which is provided with authentication the first time it is run), download any .m4a files from the root-level "Audio Journal" folder, convert them to .amr, which is about 80% smaller filesize because it drops frequencies higher and lower than the human voice, upload them then delete the original .m4a file from Dropbox, thus freeing up space.
