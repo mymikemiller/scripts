@@ -1,0 +1,11 @@
+name: DownloadYoutubePlaylist
+description: Downloads all videos in a YouTube playlist.
+# version: 1.0.0
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  youtube_explode_dart: ^1.10.8
+
+dev_dependencies:
