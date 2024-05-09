@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# ffmpeg is likely installed with the necessary options at ~/OneDrive/Projects/Mac/ffmpeg, but if not:
-# Download ffmpeg source: git clone https://github.com/FFmpeg/FFmpeg.git
-# cd ffmpeg
-# ./configure --enable-version3 --enable-nonfree --enable-libopencore-amrnb
-# make
-# ~/OneDrive/Projects/Mac/ffmpeg/ffmpeg -i my_input.m4a -ar 8000 -ab 12.2k my_output.amr
+# ffmpeg is likely installed with the necessary options at ~/projects/ffmpeg,
+# but if not: Download ffmpeg source: git clone
+# https://github.com/FFmpeg/FFmpeg.git cd ffmpeg ./configure --enable-version3
+# --enable-nonfree --enable-libopencore-amrnb make ~/projects/FFmpeg/ffmpeg -i
+# my_input.m4a -ar 8000 -ab 12.2k my_output.amr
 #
-# Script used for accessing DropBox is from https://github.com/andreafabrizi/Dropbox-Uploader
+# Script used for accessing DropBox is from
+# https://github.com/andreafabrizi/Dropbox-Uploader
+#
+# To execute: ./DropboxAudioJournalM4aToAmr.sh
 
 trim() {
     local var="$*"
@@ -21,14 +23,14 @@ trim() {
 freeSpaceAtStart=`./Dropbox-Uploader/dropbox_uploader.sh space | grep Free | awk '{print $2}'`
 echo "Starting script with $freeSpaceAtStart MB free on DropBox"
 
-./Dropbox-Uploader/dropbox_uploader.sh list Audio\ Journal | grep m4a$ | awk '{ $1=""; $2=""; print}' | while IFS= read -r line; do
+./Dropbox-Uploader/dropbox_uploader.sh list AudioJournal | grep m4a$ | awk '{ $1=""; $2=""; print}' | while IFS= read -r line; do
 #echo " 2019-02-04 19-53.m4a" | while IFS='' read filename; do
   filename=$( trim "$line" )
   filename=${filename##*/}
   filenameSansExtension=${filename%%.*}
   destinationFileName="${filenameSansExtension}.amr"
 
-  dropboxBasePath="Audio Journal"
+  dropboxBasePath="AudioJournal"
   tempBasePath="temp"
 
   dropboxSourcePath="$dropboxBasePath/$filename"
@@ -38,8 +40,9 @@ echo "Starting script with $freeSpaceAtStart MB free on DropBox"
   tempDestinationPath="$tempBasePath/$destinationFileName"
 
   # Download
-  printf "Downloading $dropboxSourcePath"
+  echo "Downloading $dropboxSourcePath"
   ./Dropbox-Uploader/dropbox_uploader.sh download "$dropboxSourcePath" "$tempSourcePath"
+  printf $?
   if [ $? -ne 0 ];
   then
       echo "Failed to download a file. Stopping."
@@ -48,7 +51,8 @@ echo "Starting script with $freeSpaceAtStart MB free on DropBox"
 
   # Convert
   # note that <&1- is used to prevent ffmpeg from eating characters from stdin, which messes up the file names for the rest of the loop
-  ~/OneDrive/Projects/Mac/ffmpeg/ffmpeg <&1- -i "$tempSourcePath" -ar 8000 -ab 12.2k "$tempDestinationPath"
+  echo "convert destination (tempSourcePath): $tempSourcePath";
+  ~/projects/FFmpeg/ffmpeg <&1- -i "$tempSourcePath" -ar 8000 -ab 12.2k "$tempDestinationPath"
   if [ $? -ne 0 ];
   then
       echo "Failed to convert a file. Possibly you need to delete the temp .amr file and regenerate. Stopping."
